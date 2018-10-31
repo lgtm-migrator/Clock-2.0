@@ -35,40 +35,37 @@ $(document).ready(function () {
         //main page
         console.log('main');
 
+        // Declearation of all DOM elements
         let selectDOM = document.querySelector('.mdc-select');
-        const select = MDCSelect.attachTo(selectDOM);
 
         const clockDOM = document.getElementById('clock');
         const maridianDOM = document.getElementById('maridian');
         const calenderDOM = document.getElementById('calender');
         const weekdayDOM = document.getElementById('weekday');
-        const canvas = document.getElementById("canvasClock");
-
-        let ctx = canvas.getContext("2d");
-        let radius = canvas.height / 2;
-        ctx.translate(radius, radius);
-        radius = radius * 0.90
-        setInterval(drawClock, 1000);
+        const canvasDOM = document.getElementById("canvasClock");
 
         /**
-         * Functions for all Clock related works
+         * All values for static clock
          */
         let clock = {
             currentSeconds: '',
             currentMinutes:,
             currentHours:,
             currentMaridian:
-            currentWeekDay:
+                currentWeekDay:
             currentDay:
-            currentMonth:
+                currentMonth:
             currentYear:
         }
 
-        function clock() {
+        /**
+         * timeClock creates and runs the clock
+         */
+        function timeClock() {
 
             if (typeof clock.currentSeconds == 'undefined') {
                 // It has not... perform the initialization
-                clock.currentSeconds = <? php echo date('s'); ?>;
+                clock.currentSeconds = ;
             }
             else {
                 if (clock.currentSeconds < 59) {
@@ -81,7 +78,7 @@ $(document).ready(function () {
             }
 
             if (typeof clock.currentMinutes == 'undefined') {
-                clock.currentMinutes =  <? php echo date('i'); ?>;
+                clock.currentMinutes =  ;
             }
             else {
                 if (clock.currentMinutes > 59) {
@@ -91,43 +88,55 @@ $(document).ready(function () {
             }
 
             if (typeof clock.currentHours == 'undefined') {
-                clock.currentHours =  <? php echo date('h'); ?>;
+                clock.currentHours =  ;
             }
 
             if (clock.currentMinutes > 60 || clock.currentSeconds > 60) {
                 alert("Some Error Occours. Kindly, Refreash the page.")
             }
 
-            var currentMaridian = "<?php echo date('A'); ?>";
+            clock.currentMaridian = "";
 
-            var currentWeekDay = "<?php echo date('l'); ?>";
+            clock.currentWeekDay = "";
 
-            var currentDay = "<?php echo date('j'); ?>";
-            var currentMonth = "<?php echo date('F'); ?>";
-            var currentYear = "<?php echo date('Y'); ?>";
+            clock.currentDay = "";
+            clock.currentMonth = "";
+            clock.currentYear = "";
 
 
             // Compose the string for display
-            var currentTimeString = clock.currentHours + ":" + clock.currentMinutes + ":" + clock.currentSeconds;
-            var currentDateString = currentMonth + " " + currentDay + "," + currentYear;
+            let currentTimeString = clock.currentHours + ":" + clock.currentMinutes + ":" + clock.currentSeconds;
+            let currentDateString = currentMonth + " " + currentDay + "," + currentYear;
 
-            console.log(currentTimeString + currentMaridian);
-            console.log(currentDateString + currentWeekDay);
+            console.log(currentTimeString + currentMaridian, currentDateString + currentWeekDay);
 
-            document.getElementById("clock").innerHTML = currentTimeString;
-            document.getElementById("maridian").innerHTML = currentMaridian;
-            document.getElementById("calender").innerHTML = currentDateString;
-            document.getElementById("weekday").innerHTML = currentWeekDay;
+            clockDOM.innerHTML = currentTimeString;
+            maridianDOM.innerHTML = currentMaridian;
+            calenderDOM.innerHTML = currentDateString;
+            weekdayDOM.innerHTML = currentWeekDay;
 
             drawClock(clock.currentHours, clock.currentMinutes, clock.currentSeconds);
         }
 
+        /**
+         * drawClock draws the clock on the canvas
+         * 
+         * @param {The initial Hour Value} iHr 
+         * @param {The initial Minute Value} iMin 
+         * @param {The initial second Value} iSec 
+         */
         function drawClock(iHr, iMin, iSec) {
             drawFace(ctx, radius);
             drawNumbers(ctx, radius);
             drawTime(ctx, radius, iHr, iMin, iSec);
         }
 
+        /**
+         * drawface draws the face of the clock in the canvas
+         * 
+         * @param {Context of the Clock} ctx 
+         * @param {Radius of the Clock} radius 
+         */
         function drawFace(ctx, radius) {
             ctx.beginPath();
             ctx.arc(0, 0, radius, 0, 2 * Math.PI);
@@ -143,6 +152,12 @@ $(document).ready(function () {
             ctx.fill();
         }
 
+        /**
+         * drawNumbers will draw the numbers in the surface ofthe clock
+         * 
+         * @param {Context of the Clock} ctx 
+         * @param {Radius of the Clock} radius 
+         */
         function drawNumbers(ctx, radius) {
             var ang;
             var num;
@@ -161,15 +176,24 @@ $(document).ready(function () {
             }
         }
 
+        /**
+         * drawtime Draws the time in the surface of the clock
+         * 
+         * @param {Context of the Clock} ctx 
+         * @param {Radius of the Clock} radius 
+         * @param {The initial Hour Value} iHr 
+         * @param {The initial Minute Value} iMin 
+         * @param {The initial second Value} iSec 
+         */
         function drawTime(ctx, radius, iHr, iMin, iSec) {
             var now = new Date();
             // var hour = now.getHours();
             // var minute = now.getMinutes();
             // var second = now.getSeconds();
 
-            var hour = iHr;
-            var minute = iMin;
-            var second = iSec;
+            let hour = iHr;
+            let minute = iMin;
+            let second = iSec;
             //hour
             hour = hour % 12;
             hour = (hour * Math.PI / 6) +
@@ -184,6 +208,14 @@ $(document).ready(function () {
             drawHand(ctx, second, radius * 0.9, radius * 0.02);
         }
 
+        /**
+         * drawHand drwas the indevisual hands of the clock
+         * 
+         * @param {Context of the Clock} ctx 
+         * @param {The position of indevisual Hands} pos 
+         * @param {The length of indevisual Hands} length 
+         * @param {The width of indevisual Hands} width 
+         */
         function drawHand(ctx, pos, length, width) {
             ctx.beginPath();
             ctx.lineWidth = width;
@@ -194,6 +226,14 @@ $(document).ready(function () {
             ctx.stroke();
             ctx.rotate(-pos);
         }
+
+
+        const select = MDCSelect.attachTo(selectDOM);
+        let ctx = canvasDOM.getContext("2d");
+        let radius = canvasDOM.height / 2;
+        ctx.translate(radius, radius);
+        radius = radius * 0.90
+        setInterval(timeClock, 1000);
 
         let d = new Date();
         ///////////////
