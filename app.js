@@ -1,3 +1,6 @@
+/**
+ * Import statements
+ */
 import { MDCTopAppBar } from '@material/top-app-bar/index';
 import { MDCDrawer } from "@material/drawer";
 import { MDCSelect } from '@material/select';
@@ -9,6 +12,9 @@ import { MDCSnackbar } from '@material/snackbar';
 
 import $ from "jquery";
 
+/**
+ * Drawer and topappbar initializations
+ */
 const drawer = MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));               //Drawer
 const topAppBar = MDCTopAppBar.attachTo(document.getElementById('app-bar'));            //Topappar
 
@@ -17,19 +23,9 @@ topAppBar.listen('MDCTopAppBar:nav', () => {
     drawer.open = !drawer.open;
 });
 
-//All of about form
-//Icon Button
-if (document.querySelector('.mdc-icon-button')) {
-    const iconButtonRipple = new MDCRipple(document.querySelector('.mdc-icon-button'));
-    iconButtonRipple.unbounded = true;
-}
-
-if (document.querySelector('.mdc-menu')) {
-    const menu = new MDCMenu(document.querySelector('.mdc-menu'));
-}
-
-
-//Document Ready
+/**
+ * This will Executes thes the document is ready for manipulation
+ */
 $(document).ready(function () {
     if ($("meta[name='app']").attr('content') === 'main6b2532vb') {
         //main page
@@ -283,6 +279,16 @@ $(document).ready(function () {
     else if ($("meta[name='app']").attr('content') === 'about2v3n653') {
         //about page
         console.log('about');
+
+        //Icon Button
+        if (document.querySelector('.mdc-icon-button')) {
+            const iconButtonRipple = new MDCRipple(document.querySelector('.mdc-icon-button'));
+            iconButtonRipple.unbounded = true;
+        }
+
+        if (document.querySelector('.mdc-menu')) {
+            const menu = new MDCMenu(document.querySelector('.mdc-menu'));
+        }
     }
     else if ($("meta[name='app']").attr('content') === 'feedbackb36vb75b') {
         //feedback page
