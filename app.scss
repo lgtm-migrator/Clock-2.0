@@ -1,0 +1,96 @@
+$mdc-theme-primary: #1e88e5;
+$mdc-theme-secondary: #ec407a;
+
+@import "@material/theme/mdc-theme";
+@import "@material/top-app-bar/mdc-top-app-bar";        //The Top appbar
+@import "@material/elevation/mdc-elevation";            //All elevations
+@import "@material/drawer/mdc-drawer";                  // Drawer
+@import "@material/list/mdc-list";                      //List
+@import "@material/typography/mdc-typography";          //Typography
+@import "@material/layout-grid/mdc-layout-grid";        //the layout-grid
+@import "@material/textfield/mdc-text-field";           //Text field
+@import "@material/textfield/helper-text/mdc-text-field-helper-text";   //Text healper
+@import "@material/select/mdc-select";                  //Select
+@import "@material/button/mdc-button";                  //Button
+@import "@material/fab/mdc-fab";                        //Floating Icon Button
+@import "@material/card/mdc-card";
+@import "@material/icon-button/mdc-icon-button";
+@import "@material/list/mdc-list";
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/menu/mdc-menu";
+@import "@material/snackbar/mdc-snackbar";
+
+// Google Font
+@import url('https://fonts.googleapis.com/css?family=Raleway|Ubuntu');
+
+body{
+    margin: 0px;
+    display: flex;
+    height: 100vh;
+}
+
+.mdc-drawer-app-content {
+    flex: auto;
+    overflow: auto;
+}
+  
+.main-content {
+    overflow: auto;
+    height: 100%;
+}
+  
+.app-bar {
+    position: absolute;
+}
+
+.banner-img {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* The clock Color */
+#clock, #calender{
+    font-family: 'Raleway', sans-serif;
+    font-size: 4em; 
+    color: #000000;  
+}
+#maridian, #weekday{
+    font-family: 'Raleway', sans-serif;
+    font-size: 2em; 
+    color: #000000;  
+}
+table#table-center {
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+
+.heading-about{
+    border-left: $mdc-theme-secondary 8px solid;
+    padding: 0 24px;
+    margin-bottom: 8px;
+}
+
+.card-grid {
+    min-width: 300px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mdc-card{
+    border-radius: 24px 8px;
+}
+
+.card-body{
+    padding: 1em;
+}
+
+.card-body .card-body--text{
+    padding: 0;
+}
+
+.dev-card {
+    max-width: 350px;
+}

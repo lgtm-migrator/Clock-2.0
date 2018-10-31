@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="app" content="feedbackb36vb75b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bundle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src='https://www.google.com/recaptcha/api.js?render=6LcGQncUAAAAAKYAaNg7ciOYFBEGMuaTQWbA8cEl'></script>
+    <title>Timeclock</title>
+</head>
+
+
+<body>
+
+    <!-- Drawer -->
+    <aside class="mdc-drawer mdc-drawer--dismissible">
+        <div class="mdc-drawer__header">
+            <div class="mdc-drawer__header-content">
+                <img class="banner-img" src="./static/img/timer-128.ico" alt="logo">
+                <h3 class="mdc-drawer__title">Time Clock</h3>
+                <h6 class="mdc-drawer__subtitle">Hi, I'm your Time Helper!</h6>
+            </div>
+        </div>
+
+        <div class="mdc-drawer__content">
+            <div class="mdc-list">
+                <a class="mdc-list-item" href="./index.html">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
+                    <span class="mdc-list-item__text">Home</span>
+                </a>
+                <a class="mdc-list-item" href="./about.html">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+                    <span class="mdc-list-item__text">About</span>
+                </a>
+                <a class="mdc-list-item mdc-list-item--activated" href="javascript: void(0)" aria-selected="true">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">feedback</i>
+                    <span class="mdc-list-item__text">Feedback</span>
+                </a>
+                <hr class="mdc-list-divider">
+                <a class="mdc-list-item" href="https://github.com/darkmatter18/Clock" target="_blank">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">code</i>
+                    <span class="mdc-list-item__text">View Source</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="mdc-drawer-app-content">
+        <!-- Top app bar -->
+        <header class="mdc-top-app-bar app-bar mdc-elevation--z4" id="app-bar">
+            <div class="mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                    <a href="#" class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</a>
+                    <span class="mdc-top-app-bar__title">Time Clock</span>
+                </section>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main class="main-content" id="main-content">
+            <div class="mdc-top-app-bar--fixed-adjust">
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="card-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+                            <div class="mdc-typography--headline5 heading-about">
+                                Feedback Form
+                            </div>
+                            <div class="mdc-card">
+                                <div class="card-body">
+                                    <div class="card-body--text mdc-typography--body2">
+
+                                        <form id="feedback-formn4774">
+                                            <div class="mdc-text-field mdc-text-field--fullwidth" id="feedback-name">
+                                                <input type="text" id="name" class="mdc-text-field__input"
+                                                    aria-controls="feedback-name-helper-text" aria-describedby="feedback-name-helper-text">
+                                                <label for="name" class="mdc-floating-label">Name</label>
+                                                <div class="mdc-line-ripple"></div>
+                                            </div>
+                                            <p id="feedback-name-helper-text" class="mdc-text-field-helper-text"
+                                                aria-hidden="true">
+                                                Enter your name Here
+                                            </p>
+
+                                            <div class="mdc-text-field mdc-text-field--fullwidth" id="feedback-email">
+                                                <input type="text" id="email" class="mdc-text-field__input"
+                                                    aria-controls="feedback-email-helper-text" aria-describedby="feedback-email-helper-text">
+                                                <label for="email" class="mdc-floating-label">E-mail</label>
+                                                <div class="mdc-line-ripple"></div>
+                                            </div>
+                                            <p id="feedback-email-helper-text" class="mdc-text-field-helper-text"
+                                                aria-hidden="true">
+                                                Enter your email id here
+                                            </p>
+
+                                            <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth"
+                                                id="feedback-data">
+                                                <textarea type="text" id="data" class="mdc-text-field__input"
+                                                    aria-controls="feedback-data-helper-text" aria-describedby="feedback-data-helper-text"
+                                                    rows="8" cols="20"></textarea>
+                                                <label for="feedback-data" class="mdc-floating-label">Feedback</label>
+                                                <div class="mdc-line-ripple"></div>
+                                            </div>
+                                            <p id="feedback-data-helper-text" class="mdc-text-field-helper-text"
+                                                aria-hidden="true">
+                                                Enter your Feedback Here
+                                            </p>
+
+                                            <button class="mdc-button mdc-button--raised" id="feedback-submit" type="submit">
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdc-snackbar mdc-snackbar--align-start" aria-live="assertive" aria-atomic="true" aria-hidden="true">
+                <div class="mdc-snackbar__text"></div>
+                <div class="mdc-snackbar__action-wrapper">
+                    <button type="button" class="mdc-snackbar__action-button"></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="bundle.js" async></script>
+</body>
+
+
+</html>

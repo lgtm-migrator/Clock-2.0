@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="app" content="about2v3n653">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bundle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Timeclock</title>
+
+    <style>
+        .dev-media {
+            background-image: url('./static/img/avatar.jpg');
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- Drawer -->
+    <aside class="mdc-drawer mdc-drawer--dismissible">
+        <div class="mdc-drawer__header">
+            <div class="mdc-drawer__header-content">
+                <img class="banner-img" src="./static/img/timer-128.ico" alt="logo">
+                <h3 class="mdc-drawer__title">Time Clock</h3>
+                <h6 class="mdc-drawer__subtitle">Hi, I'm your Time Helper!</h6>
+            </div>
+        </div>
+
+        <div class="mdc-drawer__content">
+            <div class="mdc-list">
+                <a class="mdc-list-item" href="./index.html" aria-selected="true">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
+                    <span class="mdc-list-item__text">Home</span>
+                </a>
+                <a class="mdc-list-item mdc-list-item--activated" href="javascript: void(0)" aria-selected="true">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+                    <span class="mdc-list-item__text">About</span>
+                </a>
+                <a class="mdc-list-item" href="./feedback.html">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">feedback</i>
+                    <span class="mdc-list-item__text">Feedback</span>
+                </a>
+                <hr class="mdc-list-divider">
+                <a class="mdc-list-item" href="https://github.com/darkmatter18/Clock" target="_blank">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">code</i>
+                    <span class="mdc-list-item__text">View Source</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="mdc-drawer-app-content">
+        <!-- Top app bar -->
+        <header class="mdc-top-app-bar app-bar mdc-elevation--z4" id="app-bar">
+            <div class="mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                    <a href="#" class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</a>
+                    <span class="mdc-top-app-bar__title">Time Clock</span>
+                </section>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main class="main-content" id="main-content">
+            <div class="mdc-top-app-bar--fixed-adjust">
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone card-grid">
+                            <div class="mdc-typography--headline5 heading-about">
+                                About
+                            </div>
+                            <div class="mdc-card">
+                                <div class="card-body">
+                                    <div class="card-body--text mdc-typography--body2">
+                                        This website is just for a fun :) You can very easily see the Local <b>Date and
+                                            Time</b>
+                                        of
+                                        different <b>Time-Zones</b>.
+                                        It gives the idea of creating a responsive website with <em>Bootstrap</em>.
+                                        The backend of this website is made using <em>PHP (Hypertext Pre-Processer)</em>
+                                        and
+                                        <em>Javascript</em>.
+                                        Although I added a Copyright, :p this is a Open-Source Project. The codes are
+                                        uploaded
+                                        on <em>Github</em>.
+                                        Click the <b>View Source</b> botton to see the source. If you have any
+                                        Suggession, let
+                                        me know
+                                        that. You can use any media to contact.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone card-grid">
+                            <div class="mdc-typography--headline5 heading-about">
+                                Developer
+                            </div>
+                            <div class="mdc-card dev-card">
+                                <div class="dev-media mdc-card__media mdc-card__media--square">
+                                    <div class="mdc-card__media-content"></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-body--text">
+                                        <div class="mdc-typography--headline6">Arkadip Bhattacharya</div>
+                                        <div class="mdc-typography--subtitle1">in2arkadipb13@gmail.com</div>
+                                        <hr>
+                                        <div class="mdc-typography--subtitle1">
+                                            <strong>
+                                                Student of:
+                                            </strong><br>
+                                            Govt. College of Engineering and <br> Textille Techonlogy, Berhampore
+                                        </div>
+                                    </div>
+                                    <div class="mdc-card__actions">
+                                        <div class="mdc-card__action-icons">
+                                            <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon"
+                                                title="More options">more_vert</button>
+                                            <div class="mdc-menu-surface--anchor">
+                                                <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                                                    <ul class="mdc-list" role="menu" aria-hidden="true"
+                                                        aria-orientation="vertical">
+                                                        <li class="mdc-list-item" role="menuitem">
+                                                            <span class="mdc-list-item__text">A Menu Item</span>
+                                                        </li>
+                                                        <li class="mdc-list-item" role="menuitem">
+                                                            <span class="mdc-list-item__text">Another Menu Item</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+    </div>
+    </main>
+    </div>
+
+    <script src="bundle.js" async></script>
+</body>
+
+
+</html>
