@@ -38,9 +38,10 @@ $(document).ready(function () {
         const maridianDOM = document.getElementById('maridian');
         const calenderDOM = document.getElementById('calender');
         const weekdayDOM = document.getElementById('weekday');
+
         const canvasDOM = document.getElementById("canvasClock");
         const myCalDOM = document.getElementById("myCal");
-        
+
         /**
          * All values for static clock
          */
@@ -53,7 +54,7 @@ $(document).ready(function () {
             currentDay: undefined,
             currentMonth: undefined,
             currentYear: undefined
-        }
+        };
 
         /**
          * timeClock creates and runs the clock
@@ -91,14 +92,6 @@ $(document).ready(function () {
             if (clock.currentMinutes > 60 || clock.currentSeconds > 60) {
                 alert("Some Error Occours. Kindly, Refreash the page.")
             }
-
-            clock.currentMaridian = "";
-
-            clock.currentWeekDay = "";
-
-            clock.currentDay = "";
-            clock.currentMonth = "";
-            clock.currentYear = "";
 
 
             // Compose the string for display
@@ -224,114 +217,120 @@ $(document).ready(function () {
             ctx.rotate(-pos);
         }
 
-        var day_of_week = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
-        var month_of_year = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+        /**
+         * Adds the Graphical Calender
+         * 
+         * @param {current Full Year} currYear 
+         * @param {current month(1-12)} currMonth 
+         * @param {current Day (1-31)} currDay 
+         * @param {current Weekday(0-6)} currWeekDay 
+         */
+        function drawCalender(currYear, currMonth, currDay, currWeekDay) {
+            /**
+             * Element Declearation
+             */
+            let day_of_week = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+            let month_of_year = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
-        //  DECLARE AND INITIALIZE VARIABLES
-        var Calendar = new Date();
+            const DAYS_OF_WEEK = 7;    // "constant" for number of days in a week
+            const DAYS_OF_MONTH = 31;    // "constant" for number of days in a month
 
-        var year = Calendar.getFullYear();     // Returns year
-        var month = Calendar.getMonth();    // Returns month (0-11)
-        var today = Calendar.getDate();    // Returns day (1-31)
-        var weekday = Calendar.getDay();    // Returns day (1-31)
+            /**
+             * VARIABLES FOR FORMATTING
+             * You can format the 'BORDER', 'BGCOLOR', 'CELLPADDING', 'BORDERCOLOR' tags to customize your caledanr's look.
+             */
+            const TR_start = '<TR>';
+            const TR_end = '</TR>';
+            const highlight_start = '<TD WIDTH="30"><TABLE CELLSPACING=0 BORDER=0 BGCOLOR=#1e88e5 BORDERCOLOR=CCCCCC style="color: #ffffff;"><TR><TD WIDTH=20><B><CENTER>';
+            const highlight_end = '</CENTER></TD></TR></TABLE></B>';
+            const TD_start = '<TD WIDTH="30"><CENTER>';
+            const TD_end = '</CENTER></TD>';
 
-        var DAYS_OF_WEEK = 7;    // "constant" for number of days in a week
-        var DAYS_OF_MONTH = 31;    // "constant" for number of days in a month
-        var cal;    // Used for printing
+            //  DECLARE AND INITIALIZE VARIABLES
+            let year = currYear;
+            let month = currMonth;
+            let today = currDay;
+            let weekday = currWeekDay;
 
-        Calendar.setDate(1);    // Start the calendar day at '1'
-        Calendar.setMonth(month);    // Start the calendar month at now
+            let cal;    // Used for printing
 
 
-        /* VARIABLES FOR FORMATTING
-        NOTE: You can format the 'BORDER', 'BGCOLOR', 'CELLPADDING', 'BORDERCOLOR'
-              tags to customize your caledanr's look. */
+            /**
+             * BEGIN CODE FOR CALENDAR
+             * You can format the 'BORDER', 'BGCOLOR', 'CELLPADDING', 'BORDERCOLOR' tags to customize your calendar's look.
+             */
+            cal = '<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 BORDERCOLOR=BBBBBB id="table-center" class="mdc-typography"><TR><TD>';
+            cal += '<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>' + TR_start;
+            cal += '<TD COLSPAN="' + DAYS_OF_WEEK + '" BGCOLOR="#1e88e5" style="color: #ffffff;" class="mdc-typography--body1 mdc-elevation--z2" ><CENTER><B>';
+            cal += month_of_year[month] + '   ' + year + '</B>' + TD_end + TR_end;
+            cal += TR_start;
 
-        var TR_start = '<TR>';
-        var TR_end = '</TR>';
-        var highlight_start = '<TD WIDTH="30"><TABLE CELLSPACING=0 BORDER=0 BGCOLOR=#1e88e5 BORDERCOLOR=CCCCCC style="color: #ffffff;"><TR><TD WIDTH=20><B><CENTER>';
-        var highlight_end = '</CENTER></TD></TR></TABLE></B>';
-        var TD_start = '<TD WIDTH="30"><CENTER>';
-        var TD_end = '</CENTER></TD>';
+            //   DO NOT EDIT BELOW THIS POINT  //
 
-        /* BEGIN CODE FOR CALENDAR
-        NOTE: You can format the 'BORDER', 'BGCOLOR', 'CELLPADDING', 'BORDERCOLOR'
-        tags to customize your calendar's look.*/
+            // LOOPS FOR EACH DAY OF WEEK
+            for (index = 0; index < DAYS_OF_WEEK; index++) {
 
-        cal = '<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 BORDERCOLOR=BBBBBB id="table-center" class="mdc-typography"><TR><TD>';
-        cal += '<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>' + TR_start;
-        cal += '<TD COLSPAN="' + DAYS_OF_WEEK + '" BGCOLOR="#1e88e5" style="color: #ffffff;" class="mdc-typography--body1 mdc-elevation--z2" ><CENTER><B>';
-        cal += month_of_year[month] + '   ' + year + '</B>' + TD_end + TR_end;
-        cal += TR_start;
+                // BOLD TODAY'S DAY OF WEEK
+                if (weekday == index)
+                    cal += TD_start + '<B>' + day_of_week[index] + '</B>' + TD_end;
 
-        //   DO NOT EDIT BELOW THIS POINT  //
-
-        // LOOPS FOR EACH DAY OF WEEK
-        for (index = 0; index < DAYS_OF_WEEK; index++) {
-
-            // BOLD TODAY'S DAY OF WEEK
-            if (weekday == index)
-                cal += TD_start + '<B>' + day_of_week[index] + '</B>' + TD_end;
-
-            // PRINTS DAY
-            else
-                cal += TD_start + day_of_week[index] + TD_end;
-        }
-
-        cal += TD_end + TR_end;
-        cal += TR_start;
-
-        // FILL IN BLANK GAPS UNTIL TODAY'S DAY
-        for (index = 0; index < Calendar.getDay(); index++)
-            cal += TD_start + '  ' + TD_end;
-
-        // LOOPS FOR EACH DAY IN CALENDAR
-        for (index = 0; index < DAYS_OF_MONTH; index++) {
-            if (Calendar.getDate() > index) {
-                // RETURNS THE NEXT DAY TO PRINT
-                week_day = Calendar.getDay();
-
-                // START NEW ROW FOR FIRST DAY OF WEEK
-                if (week_day == 0)
-                    cal += TR_start;
-
-                if (week_day != DAYS_OF_WEEK) {
-
-                    // SET VARIABLE INSIDE LOOP FOR INCREMENTING PURPOSES
-                    var day = Calendar.getDate();
-
-                    // HIGHLIGHT TODAY'S DATE
-                    if (today == Calendar.getDate())
-                        cal += highlight_start + day + highlight_end + TD_end;
-
-                    // PRINTS DAY
-                    else
-                        cal += TD_start + day + TD_end;
-                }
-
-                // END ROW FOR LAST DAY OF WEEK
-                if (week_day == DAYS_OF_WEEK)
-                    cal += TR_end;
+                // PRINTS DAY
+                else
+                    cal += TD_start + day_of_week[index] + TD_end;
             }
 
-            // INCREMENTS UNTIL END OF THE MONTH
-            Calendar.setDate(Calendar.getDate() + 1);
+            cal += TD_end + TR_end;
+            cal += TR_start;
 
-        }// end for loop
+            // FILL IN BLANK GAPS UNTIL TODAY'S DAY
+            for (index = 0; index < currDay; index++)
+                cal += TD_start + '  ' + TD_end;
 
-        cal += '</TD></TR></TABLE></TABLE>';
+            // LOOPS FOR EACH DAY IN CALENDAR
+            for (index = 0; index < DAYS_OF_MONTH; index++) {
+                if (currDay > index) {
+                    // RETURNS THE NEXT DAY TO PRINT
+                    week_day = currDay;
 
-        //  PRINT CALENDAR
-        document.getElementById("myCal").innerHTML = cal;
+                    // START NEW ROW FOR FIRST DAY OF WEEK
+                    if (week_day == 0)
+                        cal += TR_start;
 
-        //  End -->
+                    if (week_day != DAYS_OF_WEEK) {
+
+                        // SET VARIABLE INSIDE LOOP FOR INCREMENTING PURPOSES
+                        let day = currDay;
+
+                        // HIGHLIGHT TODAY'S DATE
+                        if (today == currDay)
+                            cal += highlight_start + day + highlight_end + TD_end;
+
+                        // PRINTS DAY
+                        else
+                            cal += TD_start + day + TD_end;
+                    }
+
+                    // END ROW FOR LAST DAY OF WEEK
+                    if (week_day == DAYS_OF_WEEK)
+                        cal += TR_end;
+                }
+
+                // INCREMENTS UNTIL END OF THE MONTH
+
+            }// end for loop
+
+            cal += '</TD></TR></TABLE></TABLE>';
+
+            //  PRINT CALENDAR
+            myCalDOM.innerHTML = cal;
+        }
 
         const select = MDCSelect.attachTo(selectDOM);
         let ctx = canvasDOM.getContext("2d");
         let radius = canvasDOM.height / 2;
         ctx.translate(radius, radius);
         radius = radius * 0.90
-        setInterval(timeClock, 1000);
+        let intv = setInterval(timeClock, 1000);
 
         let d = new Date();
         ///////////////
@@ -340,16 +339,16 @@ $(document).ready(function () {
                 if (data.s === '1') {
                     /////////////
                     $.post('./api/init.php', { token: Cookies.get('_s') })
-                        .done(function (d) {
+                        .done((d) => {
                             //////////
                             selectDOM.append()
                         })
-                        .fail(function () {
+                        .fail(() => {
 
                         })
                 }
             })
-            .fail(function () {
+            .fail(() => {
 
             });
 
@@ -367,13 +366,13 @@ $(document).ready(function () {
                 async: true,
                 dataType: 'json'
             })
-                .done(function (data) {
+                .done((data) => {
 
                 })
-                .fail(function () {
+                .fail(() => {
 
                 })
-                .always(function () {
+                .always(() => {
 
                 })
         });
@@ -464,7 +463,7 @@ $(document).ready(function () {
                         async: true,
                         dataType: 'json'
                     })
-                        .done(function (data) {
+                        .done((data) => {
                             if (data.msgSend === '2vn64vn79') {
                                 feedbackSnackbar.show({
                                     message: 'Feedback Send Successfully', actionText: 'OK', actionHandler: function () {
@@ -473,13 +472,12 @@ $(document).ready(function () {
                                 });
                             }
                         })
-                        .fail(function () {
+                        .fail(() => {
                             grecaptcha.reset();
                         })
-                        .always(function () {
+                        .always(() => {
 
                         });
-
                 });
             });
         });
