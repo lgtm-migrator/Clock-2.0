@@ -43,27 +43,13 @@ $(document).ready(function () {
         const myCalDOM = document.getElementById("myCal");
 
         /**
-         * All values for static clock
-         */
-        let clock = {
-            currentSeconds: undefined,
-            currentMinutes: undefined,
-            currentHours: undefined,
-            currentMaridian: undefined,
-            currentWeekDay: undefined,
-            currentDay: undefined,
-            currentMonth: undefined,
-            currentYear: undefined
-        };
-
-        /**
          * timeClock creates and runs the clock
          */
         function timeClock() {
 
             if (typeof clock.currentSeconds == 'undefined') {
                 // It has not... perform the initialization
-                clock.currentSeconds = ;
+                clock.currentSeconds = 0;
             }
             else {
                 if (clock.currentSeconds < 59) {
@@ -76,7 +62,7 @@ $(document).ready(function () {
             }
 
             if (typeof clock.currentMinutes == 'undefined') {
-                clock.currentMinutes =  ;
+                clock.currentMinutes = 0;
             }
             else {
                 if (clock.currentMinutes > 59) {
@@ -86,7 +72,7 @@ $(document).ready(function () {
             }
 
             if (typeof clock.currentHours == 'undefined') {
-                clock.currentHours =  ;
+                clock.currentHours = 0;
             }
 
             if (clock.currentMinutes > 60 || clock.currentSeconds > 60) {
@@ -96,14 +82,14 @@ $(document).ready(function () {
 
             // Compose the string for display
             let currentTimeString = clock.currentHours + ":" + clock.currentMinutes + ":" + clock.currentSeconds;
-            let currentDateString = currentMonth + " " + currentDay + "," + currentYear;
+            let currentDateString = clock.currentMonth + " " + clock.currentDay + "," + clock.currentYear;
 
-            console.log(currentTimeString + currentMaridian, currentDateString + currentWeekDay);
+            console.log(currentTimeString + clock.currentMaridian, currentDateString + clock.currentFormattedWeekDay);
 
             clockDOM.innerHTML = currentTimeString;
-            maridianDOM.innerHTML = currentMaridian;
+            maridianDOM.innerHTML = clock.currentMaridian;
             calenderDOM.innerHTML = currentDateString;
-            weekdayDOM.innerHTML = currentWeekDay;
+            weekdayDOM.innerHTML = clock.currentFormattedWeekDay;
 
             drawClock(clock.currentHours, clock.currentMinutes, clock.currentSeconds);
         }
@@ -218,6 +204,7 @@ $(document).ready(function () {
         }
 
         /**
+         * Calender Code
          * Adds the Graphical Calender
          * 
          * @param {current Full Year} currYear 
@@ -254,6 +241,7 @@ $(document).ready(function () {
 
             let cal;    // Used for printing
 
+            currDay = 1;
 
             /**
              * BEGIN CODE FOR CALENDAR
@@ -265,9 +253,8 @@ $(document).ready(function () {
             cal += month_of_year[month] + '   ' + year + '</B>' + TD_end + TR_end;
             cal += TR_start;
 
-            //   DO NOT EDIT BELOW THIS POINT  //
-
-            // LOOPS FOR EACH DAY OF WEEK
+            // LOOPS FOR EACH WEEK DAY OF WEEK
+            let index;
             for (index = 0; index < DAYS_OF_WEEK; index++) {
 
                 // BOLD TODAY'S DAY OF WEEK
@@ -280,17 +267,20 @@ $(document).ready(function () {
             }
 
             cal += TD_end + TR_end;
+            //End of weekDay
+
+            //Start of Days
             cal += TR_start;
 
             // FILL IN BLANK GAPS UNTIL TODAY'S DAY
             for (index = 0; index < currDay; index++)
                 cal += TD_start + '  ' + TD_end;
 
+            let week_day = currWeekDay;
             // LOOPS FOR EACH DAY IN CALENDAR
             for (index = 0; index < DAYS_OF_MONTH; index++) {
                 if (currDay > index) {
                     // RETURNS THE NEXT DAY TO PRINT
-                    week_day = currDay;
 
                     // START NEW ROW FOR FIRST DAY OF WEEK
                     if (week_day == 0)
@@ -316,6 +306,8 @@ $(document).ready(function () {
                 }
 
                 // INCREMENTS UNTIL END OF THE MONTH
+                currDay = currDay + 1;
+                week_day = week_day + 1;
 
             }// end for loop
 
@@ -325,16 +317,87 @@ $(document).ready(function () {
             myCalDOM.innerHTML = cal;
         }
 
+        /**
+         * All values for static clock
+         */
+        let clock = {
+            currentSeconds: undefined,
+            currentMinutes: undefined,
+            currentHours: undefined,
+            currentMaridian: undefined,
+            currentWeekDay: undefined,
+            currentFormattedWeekDay: undefined,
+            currentDay: undefined,
+            currentMonth: undefined,
+            currentYear: undefined
+        };
+
+        /**
+         * Clock canves initialization
+         */
         const select = MDCSelect.attachTo(selectDOM);
         let ctx = canvasDOM.getContext("2d");
         let radius = canvasDOM.height / 2;
         ctx.translate(radius, radius);
-        radius = radius * 0.90
-        let intv = setInterval(timeClock, 1000);
+        radius = radius * 0.90;
+
+        //Date object
+
+        /**
+         * Return the 12 hr format hour
+         */
+        Date.prototype.getHours12 = function () {
+            return (this.getHours() + 11) % 12 + 1; // edited.
+        }
+
+        /**
+         * Return the meridiem
+         */
+        Date.prototype.getMeridiem = function () {
+            return this.getHours() > 12 ? 'PM' : 'AM';
+        }
+        let weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+
+        //var n = weekday[d.getDay()];
+
 
         let d = new Date();
+
+        //Adding Init locals of date
+        let fullse = d.getSeconds();
+        let fullmin = d.getMinutes();
+        let fullhr = d.getHours12();
+        let fullmd = d.getMeridiem();
+        let fullwd = d.getDay();
+        let fmrtwd = weekday[d.getDay()];
+        let fulldt = d.getDate();
+        let fullmon = d.getMonth();
+        let fullYr = d.getFullYear();
+
+        //Add localvariables
+        clock.currentSeconds = fullse;
+        clock.currentMinutes = fullmin;
+        clock.currentHours = fullhr;
+        clock.currentMaridian = fullmd;
+        clock.currentWeekDay = fullwd;
+        clock.currentFormattedWeekDay = fmrtwd;
+        clock.currentDay = fulldt;
+        clock.currentMonth = fullmon;
+        clock.currentYear = fullYr;
+
+
+        let intv = setInterval(timeClock, 1000);
+        drawCalender(clock.currentYear, clock.currentMonth, clock.currentDay, clock.currentWeekDay);
+
         ///////////////
-        $.get('./api/cookie.php', { y: d.getFullYear(), m: d.getMonth(), d: d.getDate(), h: d.getHours(), mn: d.getMinutes(), s: d.getSeconds(), tz: d.getTimezoneOffset() })
+        $.get('./api/cookie.php', { tz: d.getTimezoneOffset() })
             .done(function (data) {
                 if (data.s === '1') {
                     /////////////
