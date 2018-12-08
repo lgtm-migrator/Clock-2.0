@@ -23,6 +23,8 @@ topAppBar.listen('MDCTopAppBar:nav', () => {
     drawer.open = !drawer.open;
 });
 
+const baseApiUri = 'https://api.timeclock.ml';
+
 /**
  * This will Executes thes the document is ready for manipulation
  */
@@ -226,20 +228,22 @@ $(document).ready(function () {
              * VARIABLES FOR FORMATTING
              * You can format the 'BORDER', 'BGCOLOR', 'CELLPADDING', 'BORDERCOLOR' tags to customize your caledanr's look.
              */
-            const TR_start = '<TR>';
-            const TR_end = '</TR>';
-            const highlight_start = '<TD WIDTH="30"><TABLE CELLSPACING=0 BORDER=0 BGCOLOR=#1e88e5 BORDERCOLOR=CCCCCC style="color: #ffffff;"><TR><TD WIDTH=20><B><CENTER>';
-            const highlight_end = '</CENTER></TD></TR></TABLE></B>';
-            const TD_start = '<TD WIDTH="30"><CENTER>';
-            const TD_end = '</CENTER></TD>';
+            const TR_start          = '<TR>';
+            const TR_end            = '</TR>';
+            const highlight_start   = '<TD WIDTH="30"><TABLE CELLSPACING=0 BORDER=0 BGCOLOR=#1e88e5 BORDERCOLOR=CCCCCC style="color: #ffffff;"><TR><TD WIDTH=20><B><CENTER>';
+            const highlight_end     = '</CENTER></TD></TR></TABLE></B>';
+            const TD_start          = '<TD WIDTH="30"><CENTER>';
+            const TD_end            = '</CENTER></TD>';
 
             //  DECLARE AND INITIALIZE VARIABLES
-            let year = currYear;
-            let month = currMonth;
-            let today = currDay;
-            let weekday = currWeekDay;
+            let year = currYear;            //Represents current year (4-digit number)
+            let month = currMonth;          //Represents current month (Jan - Dec)
+            let today = currDay;            //Represents current day (1-31)
+            let weekday = currWeekDay;      //Represents current weekday (0-6)
+            let mnthInitDay = 3;            //Represents the initial weekday of the month (0-6)
 
             let cal;    // Used for printing
+            let index;  // Loop indexing variable
 
             currDay = 1;
 
@@ -247,34 +251,44 @@ $(document).ready(function () {
              * BEGIN CODE FOR CALENDAR
              * You can format the 'BORDER', 'BGCOLOR', 'CELLPADDING', 'BORDERCOLOR' tags to customize your calendar's look.
              */
-            cal = '<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 BORDERCOLOR=BBBBBB id="table-center" class="mdc-typography"><TR><TD>';
-            cal += '<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>' + TR_start;
-            cal += '<TD COLSPAN="' + DAYS_OF_WEEK + '" BGCOLOR="#1e88e5" style="color: #ffffff;" class="mdc-typography--body1 mdc-elevation--z2" ><CENTER><B>';
-            cal += month_of_year[month] + '   ' + year + '</B>' + TD_end + TR_end;
-            cal += TR_start;
-
-            // LOOPS FOR EACH WEEK DAY OF WEEK
-            let index;
+            cal =   '<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 BORDERCOLOR=BBBBBB id="table-center" class="mdc-typography">';
+            cal +=      TR_start;
+            cal +=          TD_start;
+            cal +=              '<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>';
+            
+            cal +=                  TR_start;
+            cal +=                      '<TD COLSPAN="' + DAYS_OF_WEEK + '" BGCOLOR="#1e88e5" style="color: #ffffff;" class="mdc-typography--body1 mdc-elevation--z2" >';
+            cal +=                          '<CENTER>';
+            cal +=                              '<B>' + month_of_year[month] + '   ' + year + '</B>';
+            cal +=                      TD_end;
+            cal +=                  TR_end;
+            
+            cal +=                  TR_start;
+ 
+            /**
+             * Loop for weekday representation
+             * If the weekday matchs with current day, then BOLD
+             */
             for (index = 0; index < DAYS_OF_WEEK; index++) {
-
-                // BOLD TODAY'S DAY OF WEEK
-                if (weekday == index)
+                if (weekday == index) {
+                    //Bold Print
                     cal += TD_start + '<B>' + day_of_week[index] + '</B>' + TD_end;
-
-                // PRINTS DAY
-                else
+                }
+                else {
+                    //Normal Print
                     cal += TD_start + day_of_week[index] + TD_end;
+                }
             }
-
-            cal += TD_end + TR_end;
+            cal +=                  TR_end;
             //End of weekDay
 
             //Start of Days
-            cal += TR_start;
+            cal +=                  TR_start;
 
             // FILL IN BLANK GAPS UNTIL TODAY'S DAY
-            for (index = 0; index < currDay; index++)
+            for (index = 0; index < mnthInitDay; index++){
                 cal += TD_start + '  ' + TD_end;
+            }
 
             let week_day = currWeekDay;
             // LOOPS FOR EACH DAY IN CALENDAR
@@ -478,6 +492,17 @@ $(document).ready(function () {
 
         const feedbackSnackbar = new MDCSnackbar(document.querySelector('.mdc-snackbar'));
 
+        $.ajax({
+            type: 'POST',
+            url: baseApiUri + '/cookie.php',
+            data: {
+                uri: '45y3tze5ws',
+            },
+            dataType: 'json',
+            async: true
+        }).done(function(d){
+            
+        })
         //When the submit Button is clicked
         $("form#feedback-formn4774").submit(function (event) {
             event.preventDefault();
