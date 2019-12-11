@@ -23,7 +23,7 @@
     "css-loader": "^3.3.0",
     "extract-loader": "^3.0.0",
     "file-loader": "^2.0.0",
-    "node-sass": "^4.9.3",
+    "node-sass": "^4.13.0",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "webpack": "^3.12.0",
