@@ -22,7 +22,7 @@
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^3.4.0",
     "extract-loader": "^3.0.0",
-    "file-loader": "^2.0.0",
+    "file-loader": "^5.0.2",
     "node-sass": "^4.13.0",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
