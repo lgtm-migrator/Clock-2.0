@@ -15,17 +15,17 @@
     "material-components-web": "^0.40.1"
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.3",
+    "autoprefixer": "^9.7.4",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
-    "css-loader": "^3.4.0",
+    "css-loader": "^3.4.2",
     "extract-loader": "^4.0.3",
     "file-loader": "^5.0.2",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^8.0.2",
     "webpack": "^4.41.5",
     "webpack-dev-server": "^3.10.1"
   }
